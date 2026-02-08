@@ -131,7 +131,7 @@ function renderResult() {
 
     app.innerHTML += `
       <div class="team">
-        <h3>${teamName(t, i)}</h3>
+        <h3>${teamName(t, i)}（${t.capacity}人）</h3>
 
         ${state.result === null && fixed.length ? `
           <div class="card fixed">
@@ -360,6 +360,7 @@ function runShuffleLoop() {
     if (state.stopCountdown === 0) {
       state.isShuffling = false;
       state.shuffleTimer = null;
+      render();
       return;
     }
   }
@@ -370,6 +371,7 @@ function runShuffleLoop() {
 // 初期描画
 loadState();
 render();
+
 
 
 
