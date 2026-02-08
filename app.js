@@ -18,6 +18,10 @@ const shuffleSound = new Audio("sound/Snareroll.mp3");
 shuffleSound.loop = true;
 shuffleSound.volume = 0.7;
 
+const shuffleEndSound = new Audio("sound/RollEndKicks.mp3");
+shuffleEndSound.loop = false;
+shuffleEndSound.volume = 0.8;
+
 // ---------- save ----------
 function saveState() {
   const data = {
@@ -379,7 +383,10 @@ function runShuffleLoop() {
       state.shuffleTimer = null;
 
       shuffleSound.pause();
-      shuffleSound.currentTime =0;
+      shuffleSound.currentTime = 0;
+
+      shuffleEndSound.currentTime = 0;
+      shuffleEndSound.play();
       
       render();
       return;
@@ -392,6 +399,7 @@ function runShuffleLoop() {
 // 初期描画
 loadState();
 render();
+
 
 
 
