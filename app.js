@@ -131,7 +131,10 @@ function renderResult() {
 
     app.innerHTML += `
       <div class="team">
-        <h3>${teamName(t, i)}（${t.capacity}人）</h3>
+        <h3>
+          ${teamName(t, i)}
+          <span style="color:red;">（${t.capacity}人）</span>
+        </h3>
 
         ${state.result === null && fixed.length ? `
           <div class="card fixed">
@@ -371,6 +374,7 @@ function runShuffleLoop() {
 // 初期描画
 loadState();
 render();
+
 
 
 
