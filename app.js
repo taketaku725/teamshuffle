@@ -350,9 +350,9 @@ function runShuffleLoop() {
   let delay = 200; // 通常速度
 
   if (state.stopCountdown > 0) {
-    if (state.stopCountdown === 3) delay = 200;
-    if (state.stopCountdown === 2) delay = 350;
-    if (state.stopCountdown === 1) delay = 600;
+    if (state.stopCountdown === 3) delay = 300;
+    if (state.stopCountdown === 2) delay = 450;
+    if (state.stopCountdown === 1) delay = 900;
 
     state.stopCountdown--;
 
@@ -370,5 +370,6 @@ function runShuffleLoop() {
 // 初期描画
 loadState();
 render();
+
 
 
