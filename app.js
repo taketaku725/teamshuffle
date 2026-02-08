@@ -11,6 +11,7 @@ const state = {
   error: "",
   isShuffling: false,
   shuffleTimer: null,
+  stopCountdown: 0,
 };
 
 // ---------- save ----------
@@ -294,9 +295,9 @@ function resetResult() {
   if (state.isShuffling) {
     clearInterval(state.shuffleTimer);
     state.shuffleTimer = null;
-    state.isShuffling = false;
   }
-
+  state.isShuffling = false;
+  state.stopCountdown = 0;
   state.result = null;
   state.error = "";
   render();
@@ -323,26 +324,45 @@ function startShuffle() {
 
   state.error = "";
   state.isShuffling = true;
+  state.stopCountdown = 0;
 
-  state.shuffleTimer = setInterval(() => {
-    state.result = createShuffledResult();
-    render();
-  }, 200); // 1秒に5回
+  runShuffleLoop();
 }
 
 function stopShuffle() {
   if (!state.isShuffling) return;
 
-  clearInterval(state.shuffleTimer);
-  state.shuffleTimer = null;
-  state.isShuffling = false;
-
-  // 最終結果はすでに state.result にある
-  render();
+  state.stopCountdown = 3;
 }
 
+function runShuffleLoop() {
+  if (!state.isShuffling) return;
 
+  // シャッフル実行
+  state.result = createShuffledResult();
+  render();
+
+  // 次の待ち時間を決める
+  let delay = 200; // 通常速度
+
+  if (state.stopCountdown > 0) {
+    if (state.stopCountdown === 3) delay = 200;
+    if (state.stopCountdown === 2) delay = 350;
+    if (state.stopCountdown === 1) delay = 600;
+
+    state.stopCountdown--;
+
+    // カウント終了 → 完全停止
+    if (state.stopCountdown === 0) {
+      state.isShuffling = false;
+      return;
+    }
+  }
+
+  state.shuffleTimer = setTimeout(runShuffleLoop, delay);
+}
 
 // 初期描画
 loadState();
 render();
+
