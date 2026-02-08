@@ -141,7 +141,7 @@ function renderResult() {
       <div class="team">
         <h3>
           ${teamName(t, i)}
-          <span style="color:red;">（${t.capacity}人）</span>
+          <span>（${t.capacity}人）</span>
         </h3>
 
         ${state.result === null && fixed.length ? `
@@ -399,6 +399,7 @@ function runShuffleLoop() {
 // 初期描画
 loadState();
 render();
+
 
 
 
