@@ -323,7 +323,7 @@ function goResult() {
 }
 
 function startShuffle() {
-  if (state.isShuffling) return;
+  if (state.isShuffling || state.shuffleTimer) return;
 
   state.error = "";
   state.isShuffling = true;
@@ -340,7 +340,7 @@ function stopShuffle() {
 }
 
 function runShuffleLoop() {
-  if (!state.isShuffling) return;
+  if (!state.isShuffling || state.screen !== "result") return;
 
   // シャッフル実行
   state.result = createShuffledResult();
@@ -371,6 +371,7 @@ function runShuffleLoop() {
 // 初期描画
 loadState();
 render();
+
 
 
 
