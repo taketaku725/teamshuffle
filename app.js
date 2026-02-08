@@ -14,6 +14,10 @@ const state = {
   stopCountdown: 0,
 };
 
+const shuffleSound = new Audio("sound/Snareroll.mp3");
+shuffleSound.loop = true;
+shuffleSound.volume = 0.7;
+
 // ---------- save ----------
 function saveState() {
   const data = {
@@ -171,6 +175,9 @@ function renderResult() {
 
 // ---------- navigation ----------
 function go(screen) {
+  shuffleSound.pause();
+  shuffleSound.currentTime = 0;
+  
   state.screen = screen;
   state.error = "";
   if (screen === "result") state.result = null;
@@ -302,6 +309,10 @@ function resetResult() {
     clearTimeout(state.shuffleTimer);
     state.shuffleTimer = null;
   }
+
+  shuffleSound.pause();
+  shuffleSound.currentTime = 0;
+  
   state.isShuffling = false;
   state.stopCountdown = 0;
   state.result = null;
@@ -331,6 +342,9 @@ function startShuffle() {
   state.error = "";
   state.isShuffling = true;
   state.stopCountdown = 0;
+
+  shuffleSound.currentTime = 0;
+  shuffleSound.play();
 
   runShuffleLoop();
 }
@@ -363,6 +377,10 @@ function runShuffleLoop() {
     if (state.stopCountdown === 0) {
       state.isShuffling = false;
       state.shuffleTimer = null;
+
+      shuffleSound.pause();
+      shuffleSound.currentTime =0;
+      
       render();
       return;
     }
@@ -374,6 +392,7 @@ function runShuffleLoop() {
 // 初期描画
 loadState();
 render();
+
 
 
 
