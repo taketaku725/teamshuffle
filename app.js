@@ -194,6 +194,9 @@ function addMember() {
 
   state.members.push({ id: uid("m"), name });
   input.value = "";
+
+  state.error = "";
+  
   saveState();
   render();
 }
@@ -293,7 +296,7 @@ function createShuffledResult() {
 
 function resetResult() {
   if (state.isShuffling) {
-    clearInterval(state.shuffleTimer);
+    clearTimeout(state.shuffleTimer);
     state.shuffleTimer = null;
   }
   state.isShuffling = false;
@@ -331,6 +334,7 @@ function startShuffle() {
 
 function stopShuffle() {
   if (!state.isShuffling) return;
+  if (state.stopCountdown > 0) return; // ← 追加
 
   state.stopCountdown = 3;
 }
@@ -355,6 +359,7 @@ function runShuffleLoop() {
     // カウント終了 → 完全停止
     if (state.stopCountdown === 0) {
       state.isShuffling = false;
+      state.shuffleTimer = null;
       return;
     }
   }
@@ -365,4 +370,5 @@ function runShuffleLoop() {
 // 初期描画
 loadState();
 render();
+
 
