@@ -401,12 +401,14 @@ function runShuffleLoop() {
   render();
 
   // 次の待ち時間を決める
-  let delay = 200; // 通常速度
+  const BASE_SPEED = 120;
+
+  let delay = BASE_SPEED;
 
   if (state.stopCountdown > 0) {
-    if (state.stopCountdown === 3) delay = 300;
-    if (state.stopCountdown === 2) delay = 450;
-    if (state.stopCountdown === 1) delay = 900;
+    if (state.stopCountdown === 3) delay = BASE_SPEED * 1.5;
+    if (state.stopCountdown === 2) delay = BASE_SPEED * 2.5;
+    if (state.stopCountdown === 1) delay = BASE_SPEED * 5;
 
     state.stopCountdown--;
 
@@ -432,6 +434,7 @@ function runShuffleLoop() {
 // 初期描画
 loadState();
 render();
+
 
 
 
