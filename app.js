@@ -308,6 +308,34 @@ function createShuffledResult() {
   return res;
 }
 
+function createShareText() {
+  let text = "【チーム分け結果】\n\n";
+
+  state.teams.forEach((t, i) => {
+    const name = teamName(t, i);
+    const members = state.result?.[t.id] || [];
+
+    text += `${name}（${t.capacity}人）\n`;
+    members.forEach(mid => {
+      const m = state.members.find(x => x.id === mid);
+      text += `・${m.name}\n`;
+    });
+    text += "\n";
+  });
+
+  return text.trim();
+}
+
+function shareResult() {
+  if (!state.result) return;
+  if (!navigator.share) return; // スマホ以外は何もしない
+
+  navigator.share({
+    text: createShareText()
+  });
+}
+
+
 function resetResult() {
   if (state.isShuffling) {
     clearTimeout(state.shuffleTimer);
@@ -399,6 +427,7 @@ function runShuffleLoop() {
 // 初期描画
 loadState();
 render();
+
 
 
 
