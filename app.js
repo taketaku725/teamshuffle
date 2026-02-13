@@ -124,6 +124,7 @@ function renderResult() {
         : `<button onclick="startShuffle()">シャッフル</button>`
       }
       <button onclick="resetResult()">リセット</button>
+      <button onclick="shareResult()">共有</button>
     </div>
   `;
 
@@ -427,6 +428,7 @@ function runShuffleLoop() {
 // 初期描画
 loadState();
 render();
+
 
 
 
