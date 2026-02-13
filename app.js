@@ -320,7 +320,7 @@ function createShareText() {
     const name = teamName(t, i);
     const members = state.result?.[t.id] || [];
 
-    text += `${name}（${t.capacity}人）\n`;
+    text += `${name}\n`;
     members.forEach(mid => {
       const m = state.members.find(x => x.id === mid);
       text += `・${m.name}\n`;
@@ -432,6 +432,7 @@ function runShuffleLoop() {
 // 初期描画
 loadState();
 render();
+
 
 
 
