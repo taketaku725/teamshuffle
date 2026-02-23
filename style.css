@@ -67,6 +67,17 @@ input, select {
   margin-left: auto;
 }
 
+.capacity-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.capacity-control button {
+  width: 32px;
+  height: 32px;
+}
+
 .share-btn {
   background-color: #06C755;
   color: white;
@@ -98,4 +109,5 @@ input, select {
   color: #f87171;
   margin-bottom: 12px;
 }
+
 
