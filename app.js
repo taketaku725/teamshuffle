@@ -125,7 +125,7 @@ function renderResult() {
       }
       <button onclick="resetResult()">リセット</button>
       ${!state.isShuffling && state.result
-        ? `<button onclick="shareResult()">共有</button>`
+        ? `<button class="share-btn" onclick="shareResult()">共有</button>`
         : ""
       }
 
@@ -434,6 +434,7 @@ function runShuffleLoop() {
 // 初期描画
 loadState();
 render();
+
 
 
 
