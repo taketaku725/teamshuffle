@@ -104,9 +104,9 @@ function renderTeams() {
         <input placeholder="チーム名"
           value="${t.name}"
           onchange="setTeamName('${t.id}', this.value)" />
-        <div>
+        <div class="capacity-control">
           <button onclick="changeCap('${t.id}', -1)">−</button>
-          ${t.capacity}
+          <span>${t.capacity}</span>
           <button onclick="changeCap('${t.id}', 1)">＋</button>
         </div>
       </div>
@@ -434,6 +434,7 @@ function runShuffleLoop() {
 // 初期描画
 loadState();
 render();
+
 
 
 
