@@ -55,10 +55,25 @@ input, select {
 }
 
 .card {
+  display: flex;
+  align-items: center;
   background: #1f1f1f;
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 8px;
+}
+
+.card button {
+  margin-left: auto;
+}
+
+.share-btn {
+  background-color: #06C755;
+  color: white;
+}
+
+.share-btn:hover {
+  background-color: #05b34d;
 }
 
 .team {
@@ -83,3 +98,4 @@ input, select {
   color: #f87171;
   margin-bottom: 12px;
 }
+
